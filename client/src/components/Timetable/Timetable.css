@@ -1,0 +1,352 @@
+.timetable-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1rem;
+  min-height: calc(100vh - 60px);
+  background: var(--bg);
+}
+
+.timetable-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.timetable-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.tt-select {
+  padding: 0.5rem 0.8rem;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-size: 0.88rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.tt-select:focus {
+  border-color: var(--accent);
+}
+
+.tt-view-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.tt-toggle-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tt-toggle-btn.active {
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+}
+
+.tt-add-btn {
+  padding: 0.6rem 1.2rem;
+  background: var(--accent);
+  color: white;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.tt-add-btn:hover {
+  opacity: 0.88;
+}
+
+.tt-add-btn-academic {
+  background: steelblue;
+}
+
+.tt-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: var(--accent);
+  font-size: 0.88rem;
+}
+
+.tt-grid-wrapper {
+  overflow-x: auto;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+}
+
+.tt-grid {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.tt-time-header {
+  padding: 0.6rem 0.8rem;
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+  border-bottom: 1.5px solid var(--border);
+  width: 70px;
+}
+
+.tt-day-header {
+  padding: 0.6rem 0.8rem;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1.5px solid var(--border);
+  border-left: 1.5px solid var(--border);
+}
+
+.tt-time-cell {
+  padding: 0.4rem 0.8rem;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-family: monospace;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.tt-cell {
+  padding: 0.3rem;
+  border-bottom: 1px solid var(--border);
+  border-left: 1.5px solid var(--border);
+  vertical-align: top;
+  min-width: 80px;
+  min-height: 36px;
+}
+
+.tt-block {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tt-block.health {
+  background: rgba(139, 99, 64, 0.15);
+  color: var(--accent);
+  border-left: 3px solid var(--accent);
+}
+
+.tt-block.academic {
+  background: rgba(30, 100, 180, 0.12);
+  color: steelblue;
+  border-left: 3px solid steelblue;
+}
+
+.tt-legend {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.tt-legend-item {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.tt-legend-item.health {
+  color: var(--accent);
+}
+.tt-legend-item.academic {
+  color: steelblue;
+}
+
+.tt-day-date {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.tt-warnings {
+  background: rgba(184, 134, 11, 0.1);
+  border: 1.5px solid darkgoldenrod;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.tt-warning {
+  font-size: 0.82rem;
+  color: darkgoldenrod;
+  flex: 1;
+  line-height: 1.5;
+}
+
+.tt-warning-close {
+  background: transparent;
+  border: none;
+  color: darkgoldenrod;
+  font-size: 1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.tt-block {
+  cursor: pointer;
+}
+
+.tt-block:hover {
+  opacity: 0.85;
+}
+
+.tt-add-wrapper {
+  position: relative;
+}
+
+.tt-category-picker {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  z-index: 100;
+  min-width: 160px;
+}
+
+.tt-category-btn {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  text-align: left;
+}
+
+.tt-category-btn:hover {
+  opacity: 0.85;
+}
+.tt-category-btn.health {
+  background: var(--accent);
+  color: white;
+}
+.tt-category-btn.academic {
+  background: steelblue;
+  color: white;
+}
+.tt-auto-btn {
+  padding: 0.6rem 1.2rem;
+  background: steelblue;
+  color: white;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.tt-auto-btn:hover { opacity: 0.88; }
+
+.ag-summary-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 400;
+}
+
+.ag-summary-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.ag-summary-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.ag-summary-stat {
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.ag-summary-stat.conflict { color: darkgoldenrod; }
+
+.ag-summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.ag-summary-item {
+  font-size: 0.82rem;
+  color: var(--muted);
+  padding: 0.4rem 0.6rem;
+  background: var(--bg);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.ag-summary-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--accent);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.ag-summary-btn:hover { opacity: 0.88; }

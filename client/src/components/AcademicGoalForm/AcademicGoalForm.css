@@ -1,0 +1,134 @@
+.agf-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.agf-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.agf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.agf-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.agf-close {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.agf-close:hover {
+  color: crimson;
+}
+
+.agf-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.agf-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.agf-input:focus {
+  outline: none;
+  border-color: steelblue;
+}
+
+.agf-days {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.agf-day {
+  padding: 0.4rem 0.7rem;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.agf-day:hover {
+  border-color: steelblue;
+  color: steelblue;
+}
+
+.agf-day.active {
+  background: steelblue;
+  border-color: steelblue;
+  color: white;
+  font-weight: 700;
+}
+
+.agf-error {
+  color: crimson;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.agf-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: steelblue;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.agf-btn:hover {
+  opacity: 0.88;
+}
+.agf-btn:disabled {
+  background: var(--border);
+  color: var(--accent);
+  cursor: not-allowed;
+}
