@@ -93,8 +93,12 @@ export default function Timetable({ user }) {
         fetch("/api/health"),
         fetch("/api/academic"),
       ]);
+      console.log("health status:", healthRes.status);
+      console.log("academic status:", academicRes.status);
       const healthData = await healthRes.json();
       const academicData = await academicRes.json();
+      console.log("fetched health:", healthData);
+      console.log("fetched academic:", academicData);
       setHealthGoals(Array.isArray(healthData) ? healthData : []);
       setAcademicGoals(Array.isArray(academicData) ? academicData : []);
     } catch {
@@ -124,14 +128,19 @@ export default function Timetable({ user }) {
     const dateForDay = weekDays.find((d) => getDayAbbr(d) === day);
 
     const health = filteredHealthGoals.filter((g) => {
-      if (!g.days.includes(day)) return false;
-      if (g.startTime > time || g.endTime <= time) return false;
-      if (!dateForDay) return false;
+      const dayMatch = g.days.includes(day);
+      const timeMatch = !(g.startTime > time || g.endTime <= time);
       const [sY, sM, sD] = g.startDate.split("-").map(Number);
       const [eY, eM, eD] = g.endDate.split("-").map(Number);
       const startDate = new Date(sY, sM - 1, sD);
       const endDate = new Date(eY, eM - 1, eD);
-      return dateForDay >= startDate && dateForDay <= endDate;
+      const dateMatch = dateForDay >= startDate && dateForDay <= endDate;
+
+      if (day === "Su" || day === "Tu" || day === "Th") {
+        console.log(`Goal: ${g.description}, day:${day}, dayMatch:${dayMatch}, timeMatch:${timeMatch}, dateMatch:${dateMatch}, goalDays:${g.days}, goalStart:${g.startDate}, goalEnd:${g.endDate}, goalStartTime:${g.startTime}, goalEndTime:${g.endTime}, slotTime:${time}`);
+      }
+
+      return dayMatch && timeMatch && dateForDay && dateMatch;
     });
 
     const academic = filteredAcademicGoals.filter((g) => {
@@ -177,13 +186,41 @@ export default function Timetable({ user }) {
   };
 
   const handleGoalsGenerated = (created, conflicted) => {
+    console.log("handleGoalsGenerated called");
+    console.log("created:", created);
+    console.log("conflicted:", conflicted);
+
     created.forEach((goal) => {
+      console.log("Adding goal:", goal);
       if (goal.category === "health") {
-        setHealthGoals((prev) => [...prev, goal]);
+        setHealthGoals((prev) => {
+          console.log("New healthGoals length:", prev.length + 1);
+          return [...prev, goal];
+        });
       } else {
         setAcademicGoals((prev) => [...prev, goal]);
       }
     });
+
+    if (created.length > 0) {
+      const firstGoal = created[0];
+      const [year, month, day] = firstGoal.startDate.split("-").map(Number);
+      const goalDate = new Date(year, month - 1, day);
+
+      const firstDay = new Date(year, month - 1, 1);
+      const firstMonday = new Date(firstDay);
+      const dow = firstDay.getDay();
+      const diff = dow === 0 ? -6 : 1 - dow;
+      firstMonday.setDate(firstDay.getDate() + diff);
+
+      const weekNum = Math.ceil((goalDate - firstMonday) / (7 * 24 * 60 * 60 * 1000)) + 1;
+
+      console.log("Navigating to year:", year, "month:", month, "week:", Math.max(1, weekNum));
+      setSelectedYear(year);
+      setSelectedMonth(month);
+      setSelectedWeek(Math.max(1, weekNum));
+    }
+
     setGenerateSummary({ created, conflicted });
   };
 

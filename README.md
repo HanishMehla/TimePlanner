@@ -2,7 +2,7 @@
 
 **Authors:** Kartik Sharma, Hanish Mehla
 
-**Class:** CS 5610 Web Development Spring 2026
+**Class:** CS 5610 Web Development Spring 2026 https://johnguerra.co/classes/webDevelopment_online_spring_2026/
 
 ## Project Objective
 
@@ -69,4 +69,4 @@ Open `http://localhost:3000` in your browser.
 
 ## Live Demo
 
-
+https://timeplanner-5cge.onrender.com
