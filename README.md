@@ -6,7 +6,7 @@
 
 ## Project Objective
 
-TimePlanner is a web app that helps you plan your time around goals. Add health and academic goals with priority, time slots and date ranges. The app detects scheduling conflicts, suggests resolutions based on priority, and flags unrealistic schedules. It allows to view timetable by week or day — color coded by category. It also provides algorithm planning based on goal-priority for a particular goal over a period of time.
+TimePlanner is a web app that helps you plan your time around goals. Add health and academic goals with priority, time slots and date ranges. The app detects scheduling conflicts, suggests resolutions based on priority, and flags unrealistic schedules. It allows to view timetable by week or day — color coded by category. It also provides algorithm based planning for a particular goal over a period of time.
 
 ## Screenshot
 
@@ -14,7 +14,7 @@ TimePlanner is a web app that helps you plan your time around goals. Add health 
 ![Signup/SignIn](Screenshots/SIgnup_SignInPage.png)
 
 ### Timetable
-![Timetable](Screenshots/Timetable.png)
+![Timetable](Screenshots/Timetable_2.png)
 
 ### Add Goal / Generate Goal
 ![Add Goal](Screenshots/AddGoal_GenerateGoal.png)
@@ -24,7 +24,7 @@ TimePlanner is a web app that helps you plan your time around goals. Add health 
 **1. Clone the repo**
 
 ```bash
-git clone https://github.com/kartik12sharma/TimePlanner.git
+git clone https://github.com/HanishMehla/TimePlanner.git
 cd TimePlanner
 ```
 
@@ -69,4 +69,12 @@ Open `http://localhost:3000` in your browser.
 
 ## Live Demo
 
-https://timeplanner-5cge.onrender.com
+https://timeplanner-2.onrender.com/
+
+## Improvements Added:
+1. Color Changed of Health Goal blocks to distinguish them from timetable background.
+2. Auto Generate Feature Explanation added.
+3. Confirmation message after signing-up/ signing-in added.
+4. In case of conflicts, the app now preserves what the user have previously typed.
+5. Spacing between the Add Goal and Auto Generate Buttons added.
+6. Users Filter in Admin Portal added.
