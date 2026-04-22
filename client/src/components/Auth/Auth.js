@@ -42,7 +42,7 @@ export default function Auth({ onLogin }) {
 
       setSuccessMsg("Signed in successfully!");
       setTimeout(() => onLogin(data.user), 800);
-    } catch(_err) {
+    } catch (_err) {
       setError("Failed to connect to server");
     } finally {
       setLoading(false);
@@ -63,7 +63,7 @@ export default function Auth({ onLogin }) {
             onClick={() => {
               setIsSignUp(false);
               setError("");
-              setSuccessMsg(""); 
+              setSuccessMsg("");
             }}
           >
             Sign In

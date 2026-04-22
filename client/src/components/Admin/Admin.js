@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import "./Admin.css";
 
 export default function Admin() {
@@ -10,11 +11,16 @@ export default function Admin() {
   const [editData, setEditData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [filterUserId, setFilterUserId] = useState("");
 
   useEffect(() => {
-    if (activeTab === "users") fetchUsers();
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
     if (activeTab === "health") fetchHealthGoals();
     if (activeTab === "academic") fetchAcademicGoals();
+    setFilterUserId("");
   }, [activeTab]);
 
   const fetchUsers = async () => {
@@ -23,7 +29,7 @@ export default function Admin() {
       const res = await fetch("/api/users");
       const data = await res.json();
       setUsers(data);
-    } catch(_err) {
+    } catch (_err) {
       setError("Failed to fetch users");
     } finally {
       setLoading(false);
@@ -36,7 +42,7 @@ export default function Admin() {
       const res = await fetch("/api/health");
       const data = await res.json();
       setHealthGoals(data);
-    } catch(_err) {
+    } catch (_err) {
       setError("Failed to fetch health goals");
     } finally {
       setLoading(false);
@@ -49,7 +55,7 @@ export default function Admin() {
       const res = await fetch("/api/academic");
       const data = await res.json();
       setAcademicGoals(data);
-    } catch(_err) {
+    } catch (_err) {
       setError("Failed to fetch academic goals");
     } finally {
       setLoading(false);
@@ -66,7 +72,7 @@ export default function Admin() {
         setHealthGoals((prev) => prev.filter((g) => g._id !== id));
       if (type === "academic")
         setAcademicGoals((prev) => prev.filter((g) => g._id !== id));
-    } catch(_err) {
+    } catch (_err) {
       setError("Failed to delete record");
     }
   };
@@ -89,19 +95,19 @@ export default function Admin() {
       });
       if (type === "health")
         setHealthGoals((prev) =>
-          prev.map((g) => (g._id === editingId ? { ...g, ...editData } : g))
+          prev.map((g) => (g._id === editingId ? { ...g, ...editData } : g)),
         );
       if (type === "academic")
         setAcademicGoals((prev) =>
-          prev.map((g) => (g._id === editingId ? { ...g, ...editData } : g))
+          prev.map((g) => (g._id === editingId ? { ...g, ...editData } : g)),
         );
       if (type === "users")
         setUsers((prev) =>
-          prev.map((u) => (u._id === editingId ? { ...u, ...editData } : u))
+          prev.map((u) => (u._id === editingId ? { ...u, ...editData } : u)),
         );
       setEditingId(null);
       setEditData({});
-    } catch(_err) {
+    } catch (_err) {
       setError("Failed to update record");
     }
   };
@@ -312,7 +318,7 @@ export default function Admin() {
   );
 
   return (
-    <div className="admin-container">
+    <main className="admin-container">
       <h1 className="admin-title">Admin Panel</h1>
 
       <div className="admin-tabs">
@@ -340,17 +346,46 @@ export default function Admin() {
 
       {error && <p className="admin-error">{error}</p>}
 
+      {(activeTab === "health" || activeTab === "academic") && (
+        <div className="admin-filter-bar">
+          <label className="admin-filter-label">Filter by user:</label>
+          <select
+            className="admin-filter-select"
+            value={filterUserId}
+            onChange={(e) => setFilterUserId(e.target.value)}
+          >
+            <option value="">All Users</option>
+            {users.map((u) => (
+              <option key={u._id} value={u._id}>
+                {u.username}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
       {loading ? (
         <div className="admin-loading">Loading...</div>
       ) : (
         <div className="admin-table-wrapper">
           {activeTab === "users" && renderUsersTable()}
-          {activeTab === "health" && renderGoalsTable(healthGoals, "health")}
+          {activeTab === "health" &&
+            renderGoalsTable(
+              healthGoals.filter(
+                (g) => !filterUserId || g.userId === filterUserId,
+              ),
+              "health",
+            )}
           {activeTab === "academic" &&
-            renderGoalsTable(academicGoals, "academic")}
+            renderGoalsTable(
+              academicGoals.filter(
+                (g) => !filterUserId || g.userId === filterUserId,
+              ),
+              "academic",
+            )}
         </div>
       )}
-    </div>
+    </main>
   );
 }
 

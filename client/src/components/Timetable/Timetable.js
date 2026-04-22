@@ -28,14 +28,40 @@ export default function Timetable({ user }) {
   const [generateSummary, setGenerateSummary] = useState(null);
 
   const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
   const years = [2024, 2025, 2026, 2027, 2028, 2029, 2030, 2035, 2038, 2040];
   const timeSlots = [
-    "05:00", "06:00", "07:00", "08:00", "09:00", "10:00",
-    "11:00", "12:00", "13:00", "14:00", "15:00", "16:00",
-    "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00",
+    "05:00",
+    "06:00",
+    "07:00",
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+    "22:00",
+    "23:00",
   ];
 
   const getWeeksInMonth = (year, month) => {
@@ -93,12 +119,8 @@ export default function Timetable({ user }) {
         fetch("/api/health"),
         fetch("/api/academic"),
       ]);
-      console.log("health status:", healthRes.status);
-      console.log("academic status:", academicRes.status);
       const healthData = await healthRes.json();
       const academicData = await academicRes.json();
-      console.log("fetched health:", healthData);
-      console.log("fetched academic:", academicData);
       setHealthGoals(Array.isArray(healthData) ? healthData : []);
       setAcademicGoals(Array.isArray(academicData) ? academicData : []);
     } catch {
@@ -137,7 +159,6 @@ export default function Timetable({ user }) {
       const dateMatch = dateForDay >= startDate && dateForDay <= endDate;
 
       if (day === "Su" || day === "Tu" || day === "Th") {
-        console.log(`Goal: ${g.description}, day:${day}, dayMatch:${dayMatch}, timeMatch:${timeMatch}, dateMatch:${dateMatch}, goalDays:${g.days}, goalStart:${g.startDate}, goalEnd:${g.endDate}, goalStartTime:${g.startTime}, goalEndTime:${g.endTime}, slotTime:${time}`);
       }
 
       return dayMatch && timeMatch && dateForDay && dateMatch;
@@ -171,11 +192,11 @@ export default function Timetable({ user }) {
   const handleGoalUpdated = (updatedGoal) => {
     if (updatedGoal.category === "health") {
       setHealthGoals((prev) =>
-        prev.map((g) => (g._id === updatedGoal._id ? updatedGoal : g))
+        prev.map((g) => (g._id === updatedGoal._id ? updatedGoal : g)),
       );
     } else {
       setAcademicGoals((prev) =>
-        prev.map((g) => (g._id === updatedGoal._id ? updatedGoal : g))
+        prev.map((g) => (g._id === updatedGoal._id ? updatedGoal : g)),
       );
     }
   };
@@ -186,15 +207,9 @@ export default function Timetable({ user }) {
   };
 
   const handleGoalsGenerated = (created, conflicted) => {
-    console.log("handleGoalsGenerated called");
-    console.log("created:", created);
-    console.log("conflicted:", conflicted);
-
     created.forEach((goal) => {
-      console.log("Adding goal:", goal);
       if (goal.category === "health") {
         setHealthGoals((prev) => {
-          console.log("New healthGoals length:", prev.length + 1);
           return [...prev, goal];
         });
       } else {
@@ -213,9 +228,9 @@ export default function Timetable({ user }) {
       const diff = dow === 0 ? -6 : 1 - dow;
       firstMonday.setDate(firstDay.getDate() + diff);
 
-      const weekNum = Math.ceil((goalDate - firstMonday) / (7 * 24 * 60 * 60 * 1000)) + 1;
+      const weekNum =
+        Math.ceil((goalDate - firstMonday) / (7 * 24 * 60 * 60 * 1000)) + 1;
 
-      console.log("Navigating to year:", year, "month:", month, "week:", Math.max(1, weekNum));
       setSelectedYear(year);
       setSelectedMonth(month);
       setSelectedWeek(Math.max(1, weekNum));
@@ -231,14 +246,18 @@ export default function Timetable({ user }) {
     setShowAcademicForm(false);
   };
 
-  const handleAcceptResolution = (savedGoal, removedGoalId, removedCategory) => {
+  const handleAcceptResolution = (
+    savedGoal,
+    removedGoalId,
+    removedCategory,
+  ) => {
     if (removedCategory === "health") {
       setHealthGoals((prev) =>
-        prev.filter((g) => g._id.toString() !== removedGoalId.toString())
+        prev.filter((g) => g._id.toString() !== removedGoalId.toString()),
       );
     } else {
       setAcademicGoals((prev) =>
-        prev.filter((g) => g._id.toString() !== removedGoalId.toString())
+        prev.filter((g) => g._id.toString() !== removedGoalId.toString()),
       );
     }
     if (savedGoal.category === "health") {
@@ -269,11 +288,13 @@ export default function Timetable({ user }) {
   };
 
   return (
-    <div className="timetable-container">
+    <section className="timetable-container">
       {warnings.length > 0 && (
         <div className="tt-warnings">
           {warnings.map((w, i) => (
-            <div key={i} className="tt-warning">{w}</div>
+            <div key={i} className="tt-warning">
+              {w}
+            </div>
           ))}
           <button className="tt-warning-close" onClick={() => setWarnings([])}>
             x
@@ -289,7 +310,9 @@ export default function Timetable({ user }) {
             onChange={(e) => setSelectedYear(Number(e.target.value))}
           >
             {years.map((y) => (
-              <option key={y} value={y}>{y}</option>
+              <option key={y} value={y}>
+                {y}
+              </option>
             ))}
           </select>
 
@@ -303,7 +326,9 @@ export default function Timetable({ user }) {
             }}
           >
             {months.map((m, i) => (
-              <option key={m} value={i + 1}>{m}</option>
+              <option key={m} value={i + 1}>
+                {m}
+              </option>
             ))}
           </select>
 
@@ -316,19 +341,25 @@ export default function Timetable({ user }) {
             }}
           >
             {Array.from({ length: totalWeeks }, (_, i) => (
-              <option key={i + 1} value={i + 1}>Week {i + 1}</option>
+              <option key={i + 1} value={i + 1}>
+                Week {i + 1}
+              </option>
             ))}
           </select>
 
           <div className="tt-view-toggle">
             <button
-              className={view === "week" ? "tt-toggle-btn active" : "tt-toggle-btn"}
+              className={
+                view === "week" ? "tt-toggle-btn active" : "tt-toggle-btn"
+              }
               onClick={() => setView("week")}
             >
               Week
             </button>
             <button
-              className={view === "day" ? "tt-toggle-btn active" : "tt-toggle-btn"}
+              className={
+                view === "day" ? "tt-toggle-btn active" : "tt-toggle-btn"
+              }
               onClick={() => setView("day")}
             >
               Day
@@ -343,7 +374,8 @@ export default function Timetable({ user }) {
             >
               {weekDays.map((d, i) => (
                 <option key={i} value={i}>
-                  {getDayAbbr(d)} {d.getDate()} {months[d.getMonth()].slice(0, 3)}
+                  {getDayAbbr(d)} {d.getDate()}{" "}
+                  {months[d.getMonth()].slice(0, 3)}
                 </option>
               ))}
             </select>
@@ -351,10 +383,16 @@ export default function Timetable({ user }) {
         </div>
 
         <div className="tt-add-wrapper">
-          <button className="tt-add-btn" onClick={() => setShowCategoryPicker(true)}>
+          <button
+            className="tt-add-btn"
+            onClick={() => setShowCategoryPicker(true)}
+          >
             + Add Goal
           </button>
-          <button className="tt-auto-btn" onClick={() => setShowAutoGenerate(true)}>
+          <button
+            className="tt-auto-btn"
+            onClick={() => setShowAutoGenerate(true)}
+          >
             Auto Generate
           </button>
           {showCategoryPicker && (
@@ -419,22 +457,22 @@ export default function Timetable({ user }) {
                     return (
                       <td key={`${selectedWeek}-${i}`} className="tt-cell">
                         {health.map((g) => (
-                          <div
+                          <button
                             key={g._id}
                             className="tt-block health"
                             onClick={() => setSelectedGoal(g)}
                           >
                             {g.description}
-                          </div>
+                          </button>
                         ))}
                         {academic.map((g) => (
-                          <div
+                          <button
                             key={g._id}
                             className="tt-block academic"
                             onClick={() => setSelectedGoal(g)}
                           >
                             {g.description}
-                          </div>
+                          </button>
                         ))}
                       </td>
                     );
@@ -489,9 +527,11 @@ export default function Timetable({ user }) {
           newGoal={newGoalData}
           onAcceptResolution={handleAcceptResolution}
           onClose={() => {
+            const savedData = newGoalData;
             setConflicts(null);
             setNewGoalData(null);
-            if (newGoalData?.category === "health") {
+            setEditingGoal(savedData);
+            if (savedData?.category === "health") {
               setShowHealthForm(true);
             } else {
               setShowAcademicForm(true);
@@ -537,7 +577,7 @@ export default function Timetable({ user }) {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }
 

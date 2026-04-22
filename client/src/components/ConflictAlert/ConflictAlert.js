@@ -28,12 +28,12 @@ export default function ConflictAlert({
         onAcceptResolution(
           data,
           conflict.conflictingGoal._id,
-          conflict.conflictingGoal.category
+          conflict.conflictingGoal.category,
         );
       } else {
         onClose();
       }
-    } catch(_err) {
+    } catch (_err) {
       console.error("Failed to accept resolution:", _err);
     }
   };
@@ -121,7 +121,7 @@ ConflictAlert.propTypes = {
         suggestion: PropTypes.string,
         message: PropTypes.string,
       }),
-    })
+    }),
   ).isRequired,
   newGoal: PropTypes.object.isRequired,
   onAcceptResolution: PropTypes.func.isRequired,

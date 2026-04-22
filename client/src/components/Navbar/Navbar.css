@@ -17,7 +17,8 @@
 
 .navbar-logo {
   font-size: 1.3rem;
-  font-weight: 800;
+  font-weight: 700;
+  font-family: "Playfair Display", serif;
   color: var(--text);
   letter-spacing: -0.02em;
 }
