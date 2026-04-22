@@ -10,7 +10,7 @@ export default function HealthGoalForm({
   existingGoal,
 }) {
   const [description, setDescription] = useState(
-    existingGoal?.description || ""
+    existingGoal?.description || "",
   );
   const [priority, setPriority] = useState(existingGoal?.priority || "medium");
   const [startTime, setStartTime] = useState(existingGoal?.startTime || "");
@@ -26,7 +26,7 @@ export default function HealthGoalForm({
 
   const toggleDay = (day) => {
     setDays((prev) =>
-      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day],
     );
   };
 
@@ -98,7 +98,7 @@ export default function HealthGoalForm({
         onGoalAdded(data);
       }
       onClose();
-    } catch(_err) {
+    } catch (_err) {
       setError("Failed to connect to server");
     } finally {
       setLoading(false);

@@ -154,6 +154,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
 }
 
 .tt-block.health {
@@ -285,7 +291,9 @@
   transition: opacity 0.2s;
 }
 
-.tt-auto-btn:hover { opacity: 0.88; }
+.tt-auto-btn:hover {
+  opacity: 0.88;
+}
 
 .ag-summary-overlay {
   position: fixed;
@@ -319,7 +327,9 @@
   margin-bottom: 0.5rem;
 }
 
-.ag-summary-stat.conflict { color: darkgoldenrod; }
+.ag-summary-stat.conflict {
+  color: darkgoldenrod;
+}
 
 .ag-summary-list {
   display: flex;
@@ -352,4 +362,6 @@
   transition: opacity 0.2s;
 }
 
-.ag-summary-btn:hover { opacity: 0.88; }
+.ag-summary-btn:hover {
+  opacity: 0.88;
+}

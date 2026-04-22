@@ -5,7 +5,7 @@ export default function Navbar({ user, page, setPage, onLogout }) {
   const handleLogout = async () => {
     try {
       await fetch("/api/users/logout", { method: "POST" });
-    } catch(_err) {
+    } catch (_err) {
       console.error("Logout failed:", _err);
     } finally {
       onLogout();

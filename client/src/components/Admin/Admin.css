@@ -128,7 +128,7 @@
 }
 .admin-priority.medium {
   background: rgba(184, 115, 51, 0.12);
-  color: #b87333;
+  color: copper;
 }
 .admin-priority.low {
   background: rgba(139, 99, 64, 0.12);
@@ -179,5 +179,34 @@
 }
 
 .admin-edit-input:focus {
+  border-color: var(--accent);
+}
+
+.admin-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.admin-filter-label {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.admin-filter-select {
+  padding: 0.4rem 0.8rem;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.admin-filter-select:focus {
   border-color: var(--accent);
 }

@@ -41,7 +41,9 @@
   transition: color 0.2s;
 }
 
-.ag-close:hover { color: crimson; }
+.ag-close:hover {
+  color: crimson;
+}
 
 .ag-label {
   display: block;
@@ -92,5 +94,26 @@
   transition: opacity 0.2s;
 }
 
-.ag-btn:hover { opacity: 0.88; }
-.ag-btn:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+.ag-btn:hover {
+  opacity: 0.88;
+}
+.ag-btn:disabled {
+  background: var(--border);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+.ag-info {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 7px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.83rem;
+  color: var(--accent);
+  line-height: 1.6;
+}
+
+.ag-info strong {
+  color: var(--text);
+}

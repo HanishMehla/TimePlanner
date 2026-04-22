@@ -10,7 +10,7 @@ export default function GoalDetail({ goal, onEdit, onDelete, onClose }) {
       await fetch(`${endpoint}/${goal._id}`, { method: "DELETE" });
       onDelete(goal._id);
       onClose();
-    } catch(_err) {
+    } catch (_err) {
       console.error("Failed to delete goal:", _err);
     }
   };
